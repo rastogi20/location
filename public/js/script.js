@@ -1,5 +1,5 @@
 const socket = io();
-const map = L.map("map").setView([0, 0], 10);
+const map = L.map("map").setView([0, 0], 16);
 L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "OpenStreetMap"
 }).addTo(map);
@@ -27,7 +27,7 @@ socket.on('all-locations', (locations) => {
 });
 socket.on('location-received', (data) => {
     const { id, latitude, longitude } = data;
-    map.setView([latitude, longitude], 16);
+    map.setView([latitude, longitude]);
 
     if (markers[id]) {
         markers[id].setLatLng([latitude, longitude]);
